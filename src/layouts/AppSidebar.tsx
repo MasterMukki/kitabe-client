@@ -8,6 +8,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
+    useSidebar,
 } from "@/components/ui/sidebar";
 import { navItems } from "@/utils/sidebar";
 import { BookOpenText } from "lucide-react";
@@ -15,6 +16,15 @@ import { Link, useLocation } from "react-router";
 
 const AppSidebar = () => {
     const { pathname } = useLocation();
+    const { isMobile, setOpenMobile } = useSidebar()
+
+    // Handle navigation item click
+    const handleNavClick = () => {
+        // Only close the sidebar on mobile devices
+        if (isMobile) {
+            setOpenMobile(false)
+        }
+    }
 
     return (
         <Sidebar collapsible="icon">
@@ -36,7 +46,7 @@ const AppSidebar = () => {
                         <SidebarMenu>
                             {navItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title}>
+                                    <SidebarMenuButton asChild isActive={pathname === item.url} tooltip={item.title} onClick={handleNavClick}>
                                         <Link to={item.url}>
                                             <item.icon className="w-[24px] h-[24px] text-gray-700" />
                                             <span>{item.title}</span>
