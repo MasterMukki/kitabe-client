@@ -45,7 +45,7 @@ export default function Dashboard() {
     const paginatedBooks = useMemo(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
         return filteredBooks.slice(startIndex, startIndex + itemsPerPage);
-    }, [filteredBooks, currentPage]);
+    }, [filteredBooks, currentPage, itemsPerPage]);
 
     // Get unique genres for filter
     const genres = useMemo(() => {
